@@ -1,0 +1,57 @@
+html {
+    font-family: sans-serif;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+.light {
+    background-color: whitesmoke;
+    color: dark;
+}
+
+.dark {
+    background-color: darkslategray;
+    color: whitesmoke;
+}
+
+/* Table Style */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+/* Light */
+table.light th,
+table.light td {
+    border-color: black;
+}
+
+table.light tr:nth-child(even) {
+    background-color: lightgray;
+}
+
+/* Dark */
+table.dark th,
+table.dark td {
+    border-color: whitesmoke;
+}
+
+table.dark tr:nth-child(even) {
+    background-color: slategray;
+}
+
+[x-cloak] { display: none !important; }

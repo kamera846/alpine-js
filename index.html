@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- WEB Title -->
+    <title>Alpine JS</title>
+
+    <!-- Additional Script -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="./assets/js/alpine/data/dashboard.js"></script>
+    <script src="./assets/js/alpine/data/auth.js"></script>
+    
+</head>
+
+<body x-data="dashboard">
+
+    <!-- Check User Loged In -->
+    <div x-init="checkSession()"></div>
+
+    <template x-if="isLogedIn">
+        
+        <div x-data="dashboard">
+
+            <h1 x-text="title"></h1>
+
+            <button @click="logout">Logout</button>
+
+        </div>
+
+    </template>
+
+</body>
+
+</html>

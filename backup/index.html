@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta SEO -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- WEB Title -->
+    <title>Belajar Alpine JS</title>
+
+    <!-- Additional Script -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
+
+        /* Table Style */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid;
+            border-color: black;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: lightgray;
+        }
+
+        [x-cloak] { display: none !important; }
+
+    </style>
+
+    <script src="./alpine.js"></script>
+
+</head>
+
+<body>
+    <!-- X-Data -->
+    <div x-cloak x-data="data">
+
+        <!-- X-On -->
+        <button x-on:click="open = !open">Toggle</button>
+
+        <!-- X-Text -->
+        <p x-text="open == false ? 'Buka' : 'Tutup'"></p>
+
+        <!-- X-HTML -->
+        <p x-html="generateHtml"></p>
+
+        <!-- X-Model -->
+        <input type="text" x-model="name" placeholder="Ketik Nama Anda">
+        <p>Nama anda adalah: <strong x-text="name"></strong></p>
+
+        <!-- X-Bind -->
+        <h1 x-bind:class="isShow ? 'green' : 'red'" x-text="isShow ? 'Konten Ditampilkan' : 'Konten Disembunyikan'"></h1>
+
+        <!-- X-Show -->
+        <button x-on:click="isShow = !isShow" x-text="isShow ? 'Sembunyikan' : 'Tampilkan'"></button>
+        <p x-show="isShow" x-transition>Surprise!</p>
+
+        <!-- X-If -->
+        <template x-if="isShow">
+            <p>Aing Maung!!!</p>
+        </template>
+
+        <!-- Toggle Password -->
+        <div>
+            <h5>Toggle Password</h5>
+            <input x-bind:type="isPassword ? 'password' : 'text'" placeholder="Masukan Password">
+            <button x-text="isPassword ? 'Tampilkan' : 'Sembunyikan'" x-on:click="isPassword = !isPassword"></button>
+        </div>
+
+        <!-- Fetch List User -->
+        <h1>Daftar Pengguna</h1>
+
+        <button @click="fetchListUser()">Fetch Data</button>
+        <button @click="users = []">Kosongkan</button>
+
+        <!-- X-For -->
+        <template x-if="isLoading">
+            <p>Sedang memuat...</p>
+        </template>
+
+        <template x-if="!isLoading">
+            <template x-if="users.length != 0">
+                <div>
+                    <ul>
+                        <template x-for="(item, index) in users">
+                            <li x-text="`${ index + 1 }. ${ item.name }`"></li>
+                        </template>
+                    </ul>
+                    <!-- X-For Table -->
+                    <table>
+                        <thead>
+                            <th>No.</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Website</th>
+                        </thead>
+                        <tbody>
+                            <template x-for="(item, index) in users">
+                                <tr>
+                                    <td x-text="index + 1"></td>
+                                    <td x-text="item.name"></td>
+                                    <td x-text="item.email"></td>
+                                    <td x-text="item.website"></td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+    
+            <template x-if="users.length == 0">
+                <p>Data pengguna kosong</p>
+            </template>
+        </template>
+
+        <!-- X-Init -->
+        <p x-text="message"></p>
+        <div x-init="message = 'Halo Bang'"></div>
+
+        <!-- X-Effect -->
+        <div x-effect="console.log('The name is: ' + name)"></div>
+
+        <!-- X-Ignore -->
+        <div x-data="{ label: 'From Alpine' }">
+            <p x-ignore x-text="label">Hehe</p>
+            <p x-ignore>Halo</p>
+        </div>
+        
+    </div>
+
+    <div x-data="data">
+        <h1>Is Dark Mode</h1>
+        <div x-data="$store.darkMode">
+            <p x-text="on"></p>
+            <button @click="toggle()">Mode Gelap</button>
+        </div>
+    </div>
+</body>
+
+</html>
